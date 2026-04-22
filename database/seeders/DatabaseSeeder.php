@@ -55,19 +55,19 @@ class DatabaseSeeder extends Seeder
                 'title' => 'Beginner roadmap: learning security the right way',
                 'content' => "Starting in cybersecurity can feel confusing at first, so I prefer a simple roadmap. Begin with networking, operating systems, and Linux basics. After that, move to security foundations and hands-on labs. The most important thing is to build real practice step by step instead of jumping randomly between tools.",
                 'category' => 'cyber',
-                'image' => 'posts/1.jpg',
+                'image' => 'uploads/posts/1.jpg',
             ],
             [
                 'title' => 'My top tools list (and why I actually use them)',
                 'content' => "I like keeping my toolkit simple and useful. A terminal, good notes app, browser extensions, and a Linux environment already cover a lot. The goal is not to collect tools, but to understand why each one is useful and when to use it in real work.",
                 'category' => 'tools',
-                'image' => 'posts/2.jpg',
+                'image' => 'uploads/posts/2.jpg',
             ],
             [
                 'title' => 'My setup for staying focused while studying',
                 'content' => "When I study, I try to reduce distractions as much as possible. I keep a clean task list, study in short focused sessions, and review what I finished at the end of the week. Small habits make a big difference when the goal is steady progress.",
                 'category' => 'general',
-                'image' => 'posts/3.jpg',
+                'image' => 'uploads/posts/3.jpg',
             ],
         ];
 

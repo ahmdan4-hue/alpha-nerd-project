@@ -58,7 +58,7 @@
         @if($post->image)
           <div class="mb-2">
             <img
-              src="{{ asset('storage/' . $post->image) }}"
+              src="{{ asset($post->image) }}"
               alt="Post image"
               style="max-width:340px; width:100%; border-radius:12px; border:1px solid rgba(0,0,0,.12);"
             >

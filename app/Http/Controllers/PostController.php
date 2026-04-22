@@ -6,7 +6,6 @@ use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -38,7 +37,9 @@ class PostController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('posts', 'public');
+            $filename = time() . '_' . $request->file('image')->getClientOriginalName();
+            $request->file('image')->move(public_path('uploads/posts'), $filename);
+            $data['image'] = 'uploads/posts/' . $filename;
         }
 
         $data['user_id'] = Auth::id();
@@ -75,10 +76,13 @@ class PostController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            if ($post->image) {
-                Storage::disk('public')->delete($post->image);
+            if ($post->image && file_exists(public_path($post->image))) {
+                unlink(public_path($post->image));
             }
-            $data['image'] = $request->file('image')->store('posts', 'public');
+
+            $filename = time() . '_' . $request->file('image')->getClientOriginalName();
+            $request->file('image')->move(public_path('uploads/posts'), $filename);
+            $data['image'] = 'uploads/posts/' . $filename;
         } else {
             unset($data['image']);
         }
@@ -107,8 +111,8 @@ class PostController extends Controller
     {
         $post = Post::onlyTrashed()->findOrFail($id);
 
-        if ($post->image) {
-            Storage::disk('public')->delete($post->image);
+        if ($post->image && file_exists(public_path($post->image))) {
+            unlink(public_path($post->image));
         }
 
         $post->forceDelete();

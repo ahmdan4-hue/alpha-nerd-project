@@ -100,7 +100,7 @@
             <article class="slide">
               <a href="{{ route('posts.show', $post) }}" style="text-decoration:none; color:inherit; display:block;">
                 @if($post->image)
-                  <img class="thumb" src="{{ asset('storage/'.$post->image) }}" alt="{{ $post->title }}" style="object-fit:cover;">
+                  <img class="thumb" src="{{ asset($post->image) }}" alt="{{ $post->title }}" style="object-fit:cover;">
                 @else
                   <div class="thumb"></div>
                 @endif
@@ -131,7 +131,7 @@
           <article class="post-card latest-card">
             <a class="latest-thumb" href="{{ route('posts.show', $post) }}">
               @if($post->image)
-                <img class="thumb" src="{{ asset('storage/'.$post->image) }}" alt="{{ $post->title }}">
+                <img class="thumb" src="{{ asset($post->image) }}" alt="{{ $post->title }}">
               @else
                 <div class="thumb"></div>
               @endif

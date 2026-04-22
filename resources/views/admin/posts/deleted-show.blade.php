@@ -20,7 +20,7 @@
     @if($post->image)
       <div class="mb-3">
         <img
-          src="{{ asset('storage/' . $post->image) }}"
+          src="{{ asset($post->image) }}"
           alt="{{ $post->title }}"
           style="max-width:300px; width:100%; border-radius:12px; border:1px solid rgba(0,0,0,.12);"
         >
