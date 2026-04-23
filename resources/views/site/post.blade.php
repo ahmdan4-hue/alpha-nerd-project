@@ -169,7 +169,7 @@
 </main>
 
 <footer class="footer">
-  <div class="container">© 2026 Alpha Nerd</div>
+  <div class="container">© {{ date('Y') }} - {{ date('Y') - 1 }} Alpha Nerd</div>
 </footer>
 
 </body>

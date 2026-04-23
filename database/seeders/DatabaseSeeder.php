@@ -15,7 +15,6 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // Admin user
         $admin = User::updateOrCreate(
             ['email' => 'admin@alphanerd.test'],
             [
@@ -25,7 +24,6 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // Normal user
         $user = User::updateOrCreate(
             ['email' => 'user@alphanerd.test'],
             [
@@ -35,12 +33,7 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // Categories
-        $categories = [
-            'general',
-            'cyber',
-            'tools',
-        ];
+        $categories = ['general', 'cyber', 'tools'];
 
         foreach ($categories as $name) {
             Category::updateOrCreate(
@@ -49,8 +42,9 @@ class DatabaseSeeder extends Seeder
             );
         }
 
-        // Posts with images
-        $postsData = [
+        $postsCount = 15;
+
+        $basePosts = [
             [
                 'title' => 'Beginner roadmap: learning security the right way',
                 'content' => "Starting in cybersecurity can feel confusing at first, so I prefer a simple roadmap. Begin with networking, operating systems, and Linux basics. After that, move to security foundations and hands-on labs. The most important thing is to build real practice step by step instead of jumping randomly between tools.",
@@ -73,7 +67,7 @@ class DatabaseSeeder extends Seeder
 
         $createdPosts = [];
 
-        foreach ($postsData as $item) {
+        foreach ($basePosts as $item) {
             $category = Category::where('name', $item['category'])->first();
 
             $post = Post::updateOrCreate(
@@ -89,7 +83,8 @@ class DatabaseSeeder extends Seeder
             $createdPosts[] = $post;
         }
 
-        // Seed comments only once per post/content/user
+        $this->seedExtraPosts($postsCount, $admin->id, $createdPosts);
+
         foreach (array_slice($createdPosts, 0, 2) as $post) {
             Comment::firstOrCreate(
                 [
@@ -108,7 +103,6 @@ class DatabaseSeeder extends Seeder
             );
         }
 
-        // Contact message
         ContactMessage::firstOrCreate(
             [
                 'email' => 'test@example.com',
@@ -119,5 +113,40 @@ class DatabaseSeeder extends Seeder
                 'message' => 'This is a seeded contact message.',
             ]
         );
+    }
+
+    private function seedExtraPosts(int $postsCount, int $adminId, array &$createdPosts): void
+    {
+        $categories = Category::pluck('id', 'name')->toArray();
+
+        $categoryCycle = ['cyber', 'tools', 'general'];
+        $imageCycle = [
+            'uploads/posts/1.jpg',
+            'uploads/posts/2.jpg',
+            'uploads/posts/3.jpg',
+        ];
+
+        $baseCount = 3;
+
+        if ($postsCount <= $baseCount) {
+            return;
+        }
+
+        for ($i = $baseCount + 1; $i <= $postsCount; $i++) {
+            $categoryName = $categoryCycle[($i - 1) % count($categoryCycle)];
+            $imagePath = $imageCycle[($i - 1) % count($imageCycle)];
+
+            $post = Post::updateOrCreate(
+                ['title' => 'post' . $i],
+                [
+                    'content' => 'This is seeded post number ' . $i . ' for testing pagination.',
+                    'category_id' => $categories[$categoryName] ?? null,
+                    'user_id' => $adminId,
+                    'image' => $imagePath,
+                ]
+            );
+
+            $createdPosts[] = $post;
+        }
     }
 }

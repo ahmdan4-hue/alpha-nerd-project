@@ -199,7 +199,7 @@
   <footer class="app-footer">
     <div class="float-end d-none d-sm-inline">Alpha Nerd</div>
     <strong>
-      Copyright &copy; 2025
+      Copyright &copy; {{ date('Y') }} - {{ date('Y') - 1 }}
       <a href="#" class="text-decoration-none">Alpha Nerd</a>.
     </strong>
     All rights reserved.
