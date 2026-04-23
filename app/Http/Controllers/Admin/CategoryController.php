@@ -59,7 +59,7 @@ class CategoryController extends Controller
 
     public function deleted()
     {
-        $categories = Category::onlyTrashed()->latest('deleted_at')->paginate(10);
+        $categories = Category::onlyTrashed()->oldest('deleted_at')->paginate(10);
         return view('admin.categories.deleted', compact('categories'));
     }
 

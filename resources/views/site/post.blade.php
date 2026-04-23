@@ -61,7 +61,7 @@
 
       @auth
         @if(auth()->user()->is_admin)
-          <a class="admin-btn" href="{{ route('admin.posts.index') }}">DashBoard</a>
+          <a class="admin-btn" href="{{ route('admin.dashboard') }}">Dashboard</a>
         @endif
       @endauth
 
@@ -92,6 +92,7 @@
         <span>{{ $post->created_at->toFormattedDateString() }}</span>
         <span>by {{ $post->author?->name ?? 'Admin' }}</span>
       </div>
+
       @if($post->image)
         <img class="thumb" src="{{ asset($post->image) }}" alt="{{ $post->title }}" style="height:220px; width:100%; object-fit:cover; border-radius:18px; display:block;">
       @else
@@ -103,7 +104,6 @@
       </div>
     </section>
 
-    {{-- COMMENTS --}}
     <section class="section" style="margin-top:18px;">
       <div class="section-head" style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
         <h2 class="small-title" style="font-size:20px;">Comments</h2>
@@ -137,32 +137,32 @@
         </form>
       @endauth
 
-<div class="c-list">
-  @forelse($post->comments as $c)
-    <div class="c-card">
-      <div class="c-head">
-        <strong class="c-name">{{ $c->user?->name ?? 'User' }}</strong>
-        <span class="c-time">{{ $c->created_at->diffForHumans() }}</span>
-      </div>
+      <div class="c-list">
+        @forelse($post->comments as $c)
+          <div class="c-card">
+            <div class="c-head">
+              <strong class="c-name">{{ $c->user?->name ?? 'User' }}</strong>
+              <span class="c-time">{{ $c->created_at->diffForHumans() }}</span>
+            </div>
 
-      <p class="c-body">{{ $c->content }}</p>
+            <p class="c-body">{{ $c->content }}</p>
 
-      <div class="c-actions">
-        @auth
-          @if(auth()->user()->is_admin || auth()->id() === $c->user_id)
-            <form method="POST" action="{{ route('comments.destroy', $c) }}">
-              @csrf
-              @method('DELETE')
-              <button type="submit" class="c-del">Delete</button>
-            </form>
-          @endif
-        @endauth
+            <div class="c-actions">
+              @auth
+                @if(auth()->user()->is_admin || auth()->id() === $c->user_id)
+                  <form method="POST" action="{{ route('comments.destroy', $c) }}">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="c-del">Delete</button>
+                  </form>
+                @endif
+              @endauth
+            </div>
+          </div>
+        @empty
+          <p style="color:var(--muted); font-size:12px; margin:12px 0 0;">No comments yet.</p>
+        @endforelse
       </div>
-    </div>
-  @empty
-    <p style="color:var(--muted); font-size:12px; margin:12px 0 0;">No comments yet.</p>
-  @endforelse
-</div>
     </section>
 
   </div>

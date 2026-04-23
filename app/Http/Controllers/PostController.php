@@ -11,13 +11,13 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::with('category')->latest()->paginate(10);
+        $posts = Post::with('category')->oldest()->paginate(10);
         return view('admin.posts.index', compact('posts'));
     }
 
     public function deleted()
     {
-        $posts = Post::with('category')->onlyTrashed()->latest('deleted_at')->paginate(10);
+        $posts = Post::with('category')->onlyTrashed()->oldest('deleted_at')->paginate(10);
         return view('admin.posts.deleted', compact('posts'));
     }
 

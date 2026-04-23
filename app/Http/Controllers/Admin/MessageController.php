@@ -9,7 +9,7 @@ class MessageController extends Controller
 {
     public function index()
     {
-        $messages = ContactMessage::latest()->paginate(10);
+        $messages = ContactMessage::oldest()->paginate(10);
         return view('admin.messages.index', compact('messages'));
     }
 
@@ -27,7 +27,7 @@ class MessageController extends Controller
 
     public function deleted()
     {
-        $messages = ContactMessage::onlyTrashed()->latest('deleted_at')->paginate(10);
+        $messages = ContactMessage::onlyTrashed()->oldest('deleted_at')->paginate(10);
         return view('admin.messages.deleted', compact('messages'));
     }
 
