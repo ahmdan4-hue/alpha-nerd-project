@@ -171,7 +171,7 @@
           <article class="post-card sr-card">
             <a class="sr-thumb" href="{{ route('posts.show', $post) }}">
               @if($post->image)
-                <img class="thumb" src="{{ asset('storage/'.$post->image) }}" alt="{{ $post->title }}">
+                <img class="thumb" src="{{ asset($post->image) }}" alt="{{ $post->title }}">
               @else
                 <div class="thumb"></div>
               @endif
