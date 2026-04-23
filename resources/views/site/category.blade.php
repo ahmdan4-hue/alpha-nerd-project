@@ -179,8 +179,8 @@
         @endforelse
       </div>
 
-      <div style="margin-top:16px;">
-        {{ $posts->links() }}
+      <div class="pagination-wrap" style="margin-top:16px;">
+        {{ $posts->links('pagination::bootstrap-5') }}
       </div>
     </section>
 

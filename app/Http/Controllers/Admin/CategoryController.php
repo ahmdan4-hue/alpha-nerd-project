@@ -10,7 +10,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::orderBy('name')->paginate(12);
+        $categories = Category::orderBy('id')->paginate(12);
         return view('admin.categories.index', compact('categories'));
     }
 

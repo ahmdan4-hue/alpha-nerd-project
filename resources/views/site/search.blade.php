@@ -198,7 +198,7 @@
       </div>
 
       <div style="margin-top:16px;">
-        {{ $posts->links() }}
+        {{ $posts->links('pagination::bootstrap-5') }}
       </div>
     </section>
 
