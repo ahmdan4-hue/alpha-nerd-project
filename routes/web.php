@@ -22,7 +22,7 @@ use App\Http\Controllers\ProfileController;
 */
 
 Route::get('/', function () {
-    $posts = Post::latest()->take(10)->get();
+    $posts = Post::orderBy('id' , 'desc')->take(10)->get();
     return view('site.home', compact('posts'));
 })->name('home');
 
