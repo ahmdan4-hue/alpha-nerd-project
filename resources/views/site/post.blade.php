@@ -92,9 +92,8 @@
         <span>{{ $post->created_at->toFormattedDateString() }}</span>
         <span>by {{ $post->author?->name ?? 'Admin' }}</span>
       </div>
-
       @if($post->image)
-        <img class="thumb" src="{{ asset('storage/'.$post->image) }}" alt="{{ $post->title }}" style="height:220px; width:100%; object-fit:cover; border-radius:18px; display:block;">
+        <img class="thumb" src="{{ asset($post->image) }}" alt="{{ $post->title }}" style="height:220px; width:100%; object-fit:cover; border-radius:18px; display:block;">
       @else
         <div class="thumb" style="height:220px;"></div>
       @endif
