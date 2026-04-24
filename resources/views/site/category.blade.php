@@ -10,11 +10,11 @@
   </div>
 
   <div class="filters" aria-label="Categories">
-    <a class="chip-link {{ !request('category') ? 'active' : '' }}" href="{{ route('categories') }}">All</a>
+    <a class="chip-link {{ !request('cat') ? 'active' : '' }}" href="{{ route('categories') }}">All</a>
 
     @foreach($categories as $category)
-      <a class="chip-link {{ request('category') === $category->name ? 'active' : '' }}"
-         href="{{ route('categories', ['category' => $category->name]) }}">
+      <a class="chip-link {{ request('cat') === $category->name ? 'active' : '' }}"
+         href="{{ route('categories', ['cat' => $category->name]) }}">
         {{ ucfirst($category->name) }}
       </a>
     @endforeach
@@ -54,7 +54,7 @@
   </div>
 
   <div style="margin-top:16px;">
-    {{ $posts->links('pagination::bootstrap-5') }}
+    {{ $posts->appends(request()->query())->links('pagination::bootstrap-5') }}
   </div>
 </section>
 
