@@ -18,7 +18,7 @@ class DashboardController extends Controller
                 'messages'     => ContactMessage::count(),
                 'deletedPosts' => Post::onlyTrashed()->count(),
             ],
-            'latestPosts' => Post::with('category')->latest()->take(5)->get(),
+            'latestPosts' => Post::with('category')->orderby('id' , 'desc')->take(5)->get(),
         ]);
     }
 }
