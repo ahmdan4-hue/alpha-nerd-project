@@ -10,6 +10,24 @@
     gap:18px;
   }
 
+  .section,
+  .section p,
+  .section span,
+  .section div,
+  .section label,
+  .section input,
+  .section textarea,
+  .section button,
+  .section a,
+  .section li{
+    font-family:'Noto Sans Mono', monospace !important;
+  }
+
+  .small-title,
+  .info-row h4{
+    font-family:'Orbitron', sans-serif !important;
+  }
+
   .input{
     width:100%;
     border:1px solid var(--border);
@@ -18,9 +36,15 @@
     border-radius:12px;
     padding:12px 14px;
     outline:0;
-    font-family:inherit;
+    font-family:'Noto Sans Mono', monospace !important;
     font-size:12px;
     margin-top:6px;
+  }
+
+  .input::placeholder,
+  .contact-input::placeholder,
+  .contact-textarea::placeholder{
+    font-family:'Noto Sans Mono', monospace !important;
   }
 
   textarea.input{
@@ -74,8 +98,20 @@
 
   @media (max-width:900px){
     .two-col{
-      grid-template-columns: 1fr;
+      grid-template-columns:1fr;
     }
+    .contact-form > div{
+  margin-bottom: 14px;
+}
+
+.contact-form label{
+  display:block;
+  margin-bottom:10px;
+}
+
+.contact-form .input{
+  margin-top:0;
+}
   }
 </style>
 @endpush
@@ -128,7 +164,7 @@
       <label for="message">Message</label>
       <textarea class="input" id="message" name="message" placeholder="Write your message...">{{ old('message') }}</textarea>
 
-      <div style="display:flex; gap:10px; margin-top:14px; flex-wrap:wrap;">
+      <div style="display:flex; gap:14px; margin-top:14px; flex-wrap:wrap;">
         <button class="btn primary" type="submit">Send</button>
         <a class="btn" href="{{ route('home') }}">Back to Home</a>
       </div>

@@ -834,3 +834,10 @@ nav[role="navigation"] > div:first-child{
 nav[role="navigation"] > div:last-child{
   margin-left: auto;
 }
+.pagination,
+.pagination *,
+.page-link,
+.page-link *,
+nav[role="navigation"] div{
+  font-family: 'Orbitron', sans-serif !important;
+}
