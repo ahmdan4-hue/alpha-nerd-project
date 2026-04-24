@@ -4,13 +4,13 @@
 
 @push('styles')
 <style>
-  .contact-form{
+  .two-col{
     display:grid;
-    gap:14px;
+    grid-template-columns: 1.2fr .8fr;
+    gap:18px;
   }
 
-  .contact-input,
-  .contact-textarea{
+  .input{
     width:100%;
     border:1px solid var(--border);
     background:rgba(11,15,20,.35);
@@ -20,24 +20,62 @@
     outline:0;
     font-family:inherit;
     font-size:12px;
+    margin-top:6px;
   }
 
-  .contact-textarea{
+  textarea.input{
     min-height:160px;
     resize:vertical;
   }
 
-  .contact-btn{
-    border:1px solid transparent;
-    background:var(--accent);
-    color:#0B0F14;
-    padding:12px 16px;
+  .info-row{
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+    padding:12px;
+    border:1px solid var(--border);
+    border-radius:14px;
+    background:rgba(11,15,20,.25);
+  }
+
+  .info-row .icon{
+    width:42px;
+    height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
     border-radius:12px;
-    cursor:pointer;
-    font-weight:900;
-    font-family:inherit;
+    border:1px solid var(--border);
+    background:rgba(11,15,20,.35);
+    flex-shrink:0;
+  }
+
+  .info-row .icon svg{
+    width:18px;
+    height:18px;
+  }
+
+  .info-row h4{
+    margin:0 0 4px;
+    font-size:13px;
+  }
+
+  .info-row p{
+    margin:0;
+    color:var(--muted);
     font-size:12px;
-    width:max-content;
+  }
+
+  .muted{
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.8;
+  }
+
+  @media (max-width:900px){
+    .two-col{
+      grid-template-columns: 1fr;
+    }
   }
 </style>
 @endpush
@@ -48,29 +86,100 @@
   <div class="section-head">
     <h2 class="small-title">Contact</h2>
   </div>
+  <p class="muted">
+    Have a question, feedback, or want to report an issue? Send a message and I’ll reply when possible.
+  </p>
+</section>
 
-  @if(session('success'))
-    <div class="comment-success">{{ session('success') }}</div>
-  @endif
-
-  @if ($errors->any())
-    <div style="margin-top:12px; padding:12px; border:1px solid var(--border); border-radius:12px; background:rgba(255,80,80,.12);">
-      <ul style="margin:0; padding-left:18px;">
-        @foreach($errors->all() as $e) <li>{{ $e }}</li> @endforeach
-      </ul>
+<section class="two-col" style="margin-top:18px;">
+  <section class="section">
+    <div class="section-head">
+      <h2 class="small-title" style="font-size:20px;">Send a message</h2>
     </div>
-  @endif
 
-  <form class="contact-form" action="{{ route('contact.submit') }}" method="POST">
-    @csrf
+    @if (session('success'))
+      <div style="margin-bottom:12px; padding:12px; border:1px solid var(--border); border-radius:12px; background:rgba(163,230,53,.12);">
+        {{ session('success') }}
+      </div>
+    @endif
 
-    <input class="contact-input" type="text" name="name" placeholder="Your name" value="{{ old('name') }}">
-    <input class="contact-input" type="email" name="email" placeholder="Your email" value="{{ old('email') }}">
-    <input class="contact-input" type="text" name="subject" placeholder="Subject" value="{{ old('subject') }}">
-    <textarea class="contact-textarea" name="message" placeholder="Write your message...">{{ old('message') }}</textarea>
+    @if ($errors->any())
+      <div style="margin-bottom:12px; padding:12px; border:1px solid var(--border); border-radius:12px; background:rgba(255,80,80,.12);">
+        <ul style="margin:0; padding-left:18px;">
+          @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
+    @endif
 
-    <button class="contact-btn" type="submit">Send Message</button>
-  </form>
+    <form action="{{ route('contact.store') }}" method="POST">
+      @csrf
+
+      <label for="name">Name</label>
+      <input class="input" id="name" name="name" type="text" placeholder="Your name" value="{{ old('name') }}" />
+
+      <label for="email">Email</label>
+      <input class="input" id="email" name="email" type="email" placeholder="name@example.com" value="{{ old('email') }}" />
+
+      <label for="subject">Subject</label>
+      <input class="input" id="subject" name="subject" type="text" placeholder="What is this about?" value="{{ old('subject') }}" />
+
+      <label for="message">Message</label>
+      <textarea class="input" id="message" name="message" placeholder="Write your message...">{{ old('message') }}</textarea>
+
+      <div style="display:flex; gap:10px; margin-top:14px; flex-wrap:wrap;">
+        <button class="btn primary" type="submit">Send</button>
+        <a class="btn" href="{{ route('home') }}">Back to Home</a>
+      </div>
+    </form>
+  </section>
+
+  <aside class="section">
+    <div class="section-head">
+      <h2 class="small-title" style="font-size:20px;">Info</h2>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:12px;">
+      <div class="info-row">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16v16H4z"></path>
+            <path d="m4 6 8 7 8-7"></path>
+          </svg>
+        </div>
+        <div>
+          <h4>Email</h4>
+          <p>admin@alphanerd.test</p>
+        </div>
+      </div>
+
+      <div class="info-row">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10z"></path>
+            <circle cx="12" cy="11" r="2.5"></circle>
+          </svg>
+        </div>
+        <div>
+          <h4>Location</h4>
+          <p>Palestine</p>
+        </div>
+      </div>
+
+      <div class="info-row">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.63 2.62a2 2 0 0 1-.45 2.11L8 9.91a16 16 0 0 0 6.09 6.09l1.46-1.29a2 2 0 0 1 2.11-.45c.84.3 1.72.51 2.62.63A2 2 0 0 1 22 16.92z"></path>
+          </svg>
+        </div>
+        <div>
+          <h4>Response</h4>
+          <p>I usually reply as soon as possible.</p>
+        </div>
+      </div>
+    </div>
+  </aside>
 </section>
 
 @endsection
