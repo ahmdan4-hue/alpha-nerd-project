@@ -40,11 +40,8 @@ The system allows admins to manage posts, categories, comments, and contact mess
 #### Homepage
 ![Homepage](public/screenshots/home%20site.png)
 
-#### Posts Page
-![Posts Page](public/screenshots/all%20posts%20dashboard.png)
-
-#### Single Post Page
-![Single Post Page](public/screenshots/post%20site.png)
+#### Post Page
+![Post Page](public/screenshots/post%20site.png)
 
 #### Post Comments
 ![Post Comments](public/screenshots/post%20comments%20site.png)
@@ -76,6 +73,9 @@ The system allows admins to manage posts, categories, comments, and contact mess
 
 #### Dashboard Overview
 ![Admin Dashboard](public/screenshots/dashboard.png)
+
+#### Posts Page Dashboard
+![Posts Page Dashboard](public/screenshots/all%20posts%20dashboard.png)
 
 #### Posts Management
 ![Posts Management](public/screenshots/all%20posts%20dashboard.png)
