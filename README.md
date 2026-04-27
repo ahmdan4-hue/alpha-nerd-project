@@ -13,6 +13,7 @@ The system allows admins to manage posts, categories, comments, and contact mess
 - Search functionality
 - Contact page
 - Contact form that stores messages in the database
+- Post comments display
 
 ### Admin Dashboard
 - Admin dashboard overview
@@ -37,25 +38,22 @@ The system allows admins to manage posts, categories, comments, and contact mess
 ### Public Website
 
 #### Homepage
-![Homepage](public/screenshots/home.png)
+![Homepage](public/screenshots/home%20site.png)
 
 #### Posts Page
-![Posts Page](public/screenshots/all%20posts.png)
+![Posts Page](public/screenshots/all%20posts%20dashboard.png)
 
 #### Single Post Page
-![Single Post Page](public/screenshots/post.png)
+![Single Post Page](public/screenshots/post%20site.png)
 
 #### Post Comments
-![Post Comments](public/screenshots/post%20comments.png)
+![Post Comments](public/screenshots/post%20comments%20site.png)
 
 #### Categories Page
-![Categories Page](public/screenshots/categories.png)
-
-#### Category Posts Page
-![Category Posts Page](public/screenshots/category.png)
+![Categories Page](public/screenshots/categories%20site.png)
 
 #### Search Results
-![Search Results](public/screenshots/search.png)
+![Search Results](public/screenshots/search%20site.png)
 
 #### Contact Page
 ![Contact Page](public/screenshots/contact.png)
@@ -80,31 +78,34 @@ The system allows admins to manage posts, categories, comments, and contact mess
 ![Admin Dashboard](public/screenshots/dashboard.png)
 
 #### Posts Management
-![Posts Management](public/screenshots/all%20posts.png)
+![Posts Management](public/screenshots/all%20posts%20dashboard.png)
 
 #### Create Post
-![Create Post](public/screenshots/create%20post.png)
+![Create Post](public/screenshots/create%20post%20dashboard.png)
 
 #### Edit Post
-![Edit Post](public/screenshots/edit%20post.png)
+![Edit Post](public/screenshots/edit%20post%20dashboard.png)
 
 #### Deleted Posts
-![Deleted Posts](public/screenshots/deleted%20posts.png)
+![Deleted Posts](public/screenshots/deleted%20posts%20dashboard.png)
 
 #### Categories Management
-![Categories Management](public/screenshots/all%20categories.png)
+![Categories Management](public/screenshots/categories%20dashboard.png)
+
+#### Create Category
+![Create Category](public/screenshots/create%20category%20dashboard.png)
 
 #### Edit Category
-![Edit Category](public/screenshots/edit%20category.png)
+![Edit Category](public/screenshots/edit%20category%20dashboard.png)
 
 #### Deleted Categories
-![Deleted Categories](public/screenshots/deleted%20category.png)
+![Deleted Categories](public/screenshots/deleted%20categories%20dashboard.png)
 
 #### Contact Messages Management
-![Contact Messages](public/screenshots/contact%20messages.png)
+![Contact Messages](public/screenshots/contact%20messages%20dashboard.png)
 
 #### Deleted Messages
-![Deleted Messages](public/screenshots/deleted%20messages.png)
+![Deleted Messages](public/screenshots/deleted%20messages%20dashboard.png)
 
 ## Tech Stack
 
@@ -146,12 +147,6 @@ Install PHP dependencies:
 composer install
 ```
 
-Install frontend dependencies:
-
-```bash
-npm install
-```
-
 Create the environment file:
 
 ```bash
@@ -178,28 +173,34 @@ Run migrations and seeders:
 php artisan migrate --seed
 ```
 
-Create the storage link:
-
-```bash
-php artisan storage:link
-```
-
 Start the Laravel server:
 
 ```bash
 php artisan serve
 ```
 
-Run Vite:
-
-```bash
-npm run dev
-```
-
 Now open:
 
 ```text
 http://127.0.0.1:8000
+```
+
+## Frontend Assets Note
+
+This project mainly uses public assets and post images from the `public` directory.  
+Because of that, `php artisan storage:link` is not required for the uploaded post images if they are stored inside `public/posts`.
+
+If a page uses Laravel Breeze assets through Vite, install and run the frontend tools:
+
+```bash
+npm install
+npm run dev
+```
+
+For a production build, use:
+
+```bash
+npm run build
 ```
 
 ## Project Purpose
