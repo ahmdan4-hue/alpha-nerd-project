@@ -212,5 +212,6 @@ The project also reflects secure web development basics such as protected admin 
 ## Author
 
 Ahmed  
-4th-year Cybersecurity student at UCAS  
+Fadi
+4th-year Cybersecurity students at UCAS  
 Interested in Laravel backend development, secure web applications, and cybersecurity.
